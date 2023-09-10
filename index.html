@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <div id="countdown"></div>
+
+    <script>
+        // Get the time parameter from the URL (e.g., "?time=10" for 10 seconds)
+        var urlParams = new URLSearchParams(window.location.search);
+        var timeInMinutes = parseInt(urlParams.get('minutes')) || 0; // Default to 60 seconds if no time parameter is provided
+        var timeInSeconds = parseInt(urlParams.get('seconds')) || 0; // Default to 60 seconds if no time parameter is provided
+
+        // Function to update the countdown timer
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.innerHTML = `Time remaining: ${timeInMinutes}:${timeInSeconds} seconds`;
+
+            if (timeInSeconds => 0) {
+                timeInSeconds--;
+                if (timeInSeconds < 0){
+                    
+                    timeInMinutes--;
+                    if (timeInMinutes < 0){
+                        countdownElement.innerHTML = 'Time is up!';
+                    } else{
+                        timeInSeconds = 59
+                    }
+
+                }
+                setTimeout(updateCountdown, 1000); // Update the timer every second
+            }
+        }
+
+        // Start the countdown when the page loads
+        window.onload = updateCountdown;
+    </script>
+</body>
+</html>
+
+
+
